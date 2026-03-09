@@ -1,443 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sarah E. Scott — Academic Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Nunito:wght@400;700&display=swap" rel="stylesheet"/>
+  <title>Sarah E. Scott — Avian Ecologist</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --rust: #C4622D;
-      --rust-dark: #9E4A1E;
-      --rust-light: #FDF0E8;
-      --slate: #4A6B8A;
-      --slate-dark: #2E4A66;
-      --slate-light: #EBF0F5;
-      --gold: #D4943A;
-      --gold-light: #FDF5E6;
-      --ink: #1C2B3A;
-      --paper: #FAFBF8;
-      --muted: #6B7A8D;
-      --rule: #D8E0E8;
-      --white: #ffffff;
+      --bg:       #faf8f4;
+      --bg2:      #ffffff;
+      --ink:      #1a1612;
+      --ink-mid:  #4a4035;
+      --ink-light:#8a7d6e;
+      --rule:     #e8e2d8;
+      --rust:     #b8521e;
+      --rust-pale:#fdf0ea;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--paper);
-      color: var(--ink);
-      font-size: 16px;
-      line-height: 1.7;
-    }
-
-    /* ── BIRD SILHOUETTES ── */
-    .birds {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 0;
-    }
-    .bird {
-      position: absolute;
-      opacity: 0.08;
-      fill: currentColor;
-    }
-    .bird svg { display: block; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); font-size: 16px; line-height: 1.75; }
 
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(250,251,248,0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 2px solid var(--rule);
+      background: rgba(250,248,244,0.96); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 5vw;
-      height: 64px;
+      padding: 0 6vw; height: 56px;
     }
     .nav-name {
-      font-family: 'Nunito', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-      color: var(--rust);
+      font-family: 'EB Garamond', serif; font-size: 1.15rem;
+      font-style: italic; color: var(--ink); letter-spacing: 0.01em;
     }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
-      text-decoration: none;
-      color: var(--muted);
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      text-decoration: none; color: var(--ink-light);
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
       transition: color 0.2s;
-      position: relative;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute; bottom: -4px; left: 0; right: 0;
-      height: 2px; background: var(--rust);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 0.2s;
     }
     .nav-links a:hover { color: var(--rust); }
-    .nav-links a:hover::after { transform: scaleX(1); }
 
     /* ── HERO ── */
     #hero {
       min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      padding-top: 64px;
-      position: relative;
+      display: grid; grid-template-columns: 1fr 1fr;
+      padding-top: 56px; position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: url('photo-idaho-hills.jpg') center 40% / cover no-repeat;
+      filter: brightness(0.28) saturate(0.8);
     }
     .hero-text {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 8vw 5vw 8vw 8vw;
-      position: relative; z-index: 1;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 6vw 4vw 6vw 8vw; position: relative; z-index: 1;
     }
-    .hero-label {
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--rust);
-      margin-bottom: 1.2rem;
+    .hero-eyebrow {
+      font-family: 'DM Sans', sans-serif; font-size: 0.7rem;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(250,248,244,0.5); margin-bottom: 0.8rem;
     }
     .hero-name {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 5vw, 4.5rem);
-      line-height: 1.1;
-      margin-bottom: 1.2rem;
-      color: var(--ink);
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(3rem, 5.5vw, 5rem);
+      font-weight: 400; line-height: 1.0; color: #fff;
+      margin-bottom: 1.4rem;
     }
-    .hero-name em { font-style: italic; color: var(--slate); }
+    .hero-name em { font-style: italic; color: rgba(250,248,244,0.75); }
     .hero-tagline {
-      font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 440px;
-      margin-bottom: 2.4rem;
+      font-family: 'EB Garamond', serif; font-size: 1.15rem;
+      font-style: italic; color: rgba(250,248,244,0.65);
+      max-width: 400px; line-height: 1.75; margin-bottom: 2rem;
     }
     .hero-meta {
-      display: flex; flex-direction: column; gap: 0.4rem;
-      font-size: 0.9rem; color: var(--muted);
-      border-left: 3px solid var(--gold);
-      padding-left: 1rem;
-      margin-bottom: 2.8rem;
+      border-left: 2px solid var(--rust); padding-left: 1rem;
+      display: flex; flex-direction: column; gap: 0.2rem;
+      font-size: 0.8rem; color: rgba(250,248,244,0.45);
+      margin-bottom: 2.8rem; font-family: 'DM Sans', sans-serif;
     }
-    .hero-meta strong { color: var(--ink); }
-    .btn-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .hero-meta strong { color: rgba(250,248,244,0.65); font-weight: 500; }
+    .btn-row { display: flex; gap: 0.9rem; }
     .btn {
-      display: inline-block;
-      padding: 0.75rem 1.8rem;
-      border-radius: 50px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      text-decoration: none;
-      transition: all 0.2s;
+      display: inline-block; padding: 0.6rem 1.5rem;
+      font-family: 'DM Sans', sans-serif; font-size: 0.72rem;
+      font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; border-radius: 2px; transition: all 0.2s;
+    }
+    .btn-primary { background: var(--rust); color: #fff; border: 1.5px solid var(--rust); }
+    .btn-primary:hover { background: #9a3f12; border-color: #9a3f12; }
+    .btn-outline { background: transparent; color: rgba(250,248,244,0.8); border: 1.5px solid rgba(250,248,244,0.25); }
+    .btn-outline:hover { border-color: rgba(250,248,244,0.7); color: #fff; }
+
+    /* polaroid photo */
+    .hero-photo-col {
+      display: flex; align-items: flex-end; justify-content: center;
+      padding: 4rem 5rem 0; position: relative; z-index: 1;
+    }
+    .polaroid {
+      background: #fff; padding: 8px 8px 36px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.45);
+      transform: rotate(1.5deg);
+    }
+    .polaroid img {
+      display: block; width: 290px; height: 400px;
+      object-fit: cover; object-position: center top;
+    }
+    .polaroid-cap {
+      font-family: 'EB Garamond', serif; font-size: 0.88rem;
+      font-style: italic; color: #aaa;
+      text-align: center; margin-top: 6px;
+    }
+
+    /* ── PHOTO STRIP ── */
+    .strip {
+      display: flex; height: 180px; overflow: hidden;
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    }
+    .strip img {
+      flex: 1; object-fit: cover;
+      filter: saturate(0.75) brightness(0.95);
+      transition: flex 0.5s ease, filter 0.3s;
       cursor: pointer;
     }
-    .btn-primary { background: var(--rust); color: #fff; border: 2px solid var(--rust); }
-    .btn-primary:hover { background: var(--rust-dark); border-color: var(--rust-dark); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(196,98,45,0.3); }
-    .btn-outline { background: transparent; color: var(--ink); border: 2px solid var(--slate); color: var(--slate); }
-    .btn-outline:hover { background: var(--slate); color: white; transform: translateY(-1px); }
-
-    .hero-image {
-      background: linear-gradient(160deg, #EBF0F5 0%, #F5EDE4 100%);
-      position: relative;
-      overflow: hidden;
-      display: flex; align-items: flex-end; justify-content: center;
-    }
-    .hero-kestrel {
-      width: 85%;
-      max-width: 420px;
-      object-fit: contain;
-      position: relative; z-index: 1;
-      filter: drop-shadow(0 20px 40px rgba(100,60,20,0.15));
-      animation: float 6s ease-in-out infinite;
-    }
-    .hero-blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(60px);
-      pointer-events: none;
-    }
+    .strip img:hover { flex: 3; filter: saturate(1) brightness(1); }
 
     /* ── SECTIONS ── */
-    section { padding: 7rem 8vw; position: relative; }
-    section:nth-child(even) { background: var(--white); }
+    section { padding: 6rem 8vw; }
+    #about    { background: var(--bg); }
+    #publications { background: var(--bg2); }
+    #projects { background: var(--bg); }
+    #cv       { background: var(--bg2); }
+    #contact  { background: var(--ink); position: relative; overflow: hidden; }
 
-    .section-header { margin-bottom: 3.5rem; }
-    .section-label {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--rust);
-      margin-bottom: 0.6rem;
+    .sec-label {
+      font-family: 'DM Sans', sans-serif; font-size: 0.68rem;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--rust); margin-bottom: 0.4rem;
     }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      line-height: 1.2;
-      color: var(--ink);
+    .sec-title {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+      font-weight: 400; color: var(--ink); line-height: 1.15;
     }
-    .section-rule {
-      width: 48px; height: 3px;
-      background: linear-gradient(90deg, var(--rust), var(--gold));
-      margin-top: 1rem;
-      border-radius: 2px;
-    }
-
-    /* floating bird accent for sections */
-    .section-bird {
-      position: absolute;
-      right: 6vw; top: 4rem;
-      opacity: 0.06;
-      pointer-events: none;
-    }
+    .sec-rule { width: 32px; height: 2px; background: var(--rule); margin-top: 0.8rem; margin-bottom: 3rem; }
 
     /* ── ABOUT ── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 5rem;
-      align-items: start;
-    }
-    .about-body p { color: #444; margin-bottom: 1.2rem; }
-    .interests-list {
-      display: flex; flex-wrap: wrap; gap: 0.6rem;
-      margin-top: 1.5rem;
-    }
+    .about-layout { display: grid; grid-template-columns: 1fr 300px; gap: 5rem; align-items: start; }
+    .about-body p { font-size: 0.95rem; color: var(--ink-mid); line-height: 1.85; margin-bottom: 1rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.4rem; }
     .tag {
-      display: inline-block;
-      padding: 0.3rem 0.9rem;
-      border: 1.5px solid var(--rule);
-      font-size: 0.8rem;
-      border-radius: 50px;
-      color: var(--slate);
-      background: var(--slate-light);
-      font-weight: 500;
+      padding: 0.2rem 0.75rem; border: 1px solid var(--rule);
+      border-radius: 2px; font-size: 0.72rem; font-weight: 500;
+      color: var(--ink-light); letter-spacing: 0.04em;
     }
-    .about-sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+    .about-photo {
+      width: 100%; height: 280px; object-fit: cover;
+      object-position: center top;
+      display: block; margin-bottom: 0.5rem;
+    }
+    .photo-cap {
+      font-family: 'EB Garamond', serif; font-style: italic;
+      font-size: 0.85rem; color: var(--ink-light); text-align: center;
+      display: block; margin-bottom: 1.5rem;
+    }
     .info-card {
-      background: var(--paper);
-      border: 1.5px solid var(--rule);
-      padding: 1.4rem 1.6rem;
-      border-radius: 12px;
-      transition: box-shadow 0.2s;
+      border: 1px solid var(--rule); padding: 1.1rem 1.2rem;
+      margin-bottom: 1rem; background: var(--bg2);
     }
-    .info-card:hover { box-shadow: 0 4px 20px rgba(196,98,45,0.08); }
     .info-card h4 {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--rust);
-      margin-bottom: 0.8rem;
+      font-family: 'DM Sans', sans-serif; font-size: 0.68rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--rust); margin-bottom: 0.6rem;
     }
     .info-card p, .info-card li {
-      font-size: 0.9rem;
-      color: var(--muted);
-      list-style: none;
-      padding: 0.2rem 0;
+      font-size: 0.86rem; color: var(--ink-mid); list-style: none; line-height: 1.7;
+    }
+    .eggs-wrap { border: 1px solid var(--rule); overflow: hidden; }
+    .eggs-wrap img { display: block; width: 100%; height: 160px; object-fit: cover; }
+    .eggs-wrap span {
+      display: block; font-family: 'EB Garamond', serif; font-style: italic;
+      font-size: 0.85rem; color: var(--ink-light); text-align: center;
+      padding: 0.5rem 0.5rem 0.6rem; background: var(--bg2);
     }
 
     /* ── PUBLICATIONS ── */
-    .pub-list { display: flex; flex-direction: column; gap: 0; }
+    .pub-sub {
+      font-family: 'DM Sans', sans-serif; font-size: 0.68rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ink-light); margin: 2rem 0 1rem;
+      padding-bottom: 0.5rem; border-bottom: 1px solid var(--rule);
+    }
     .pub-item {
-      display: grid;
-      grid-template-columns: 56px 1fr;
-      gap: 1.5rem;
-      padding: 2rem 0;
+      display: grid; grid-template-columns: 44px 1fr;
+      gap: 1.2rem; padding: 1.3rem 0;
       border-bottom: 1px solid var(--rule);
     }
-    .pub-item:first-child { border-top: 1px solid var(--rule); }
-    .pub-year {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      color: var(--rule);
-      line-height: 1.2;
-      padding-top: 0.2rem;
+    .pub-item:first-of-type { border-top: 1px solid var(--rule); }
+    .pub-yr {
+      font-family: 'EB Garamond', serif; font-size: 1.1rem;
+      font-style: italic; color: var(--rule); padding-top: 0.1rem;
     }
     .pub-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      margin-bottom: 0.3rem;
-      line-height: 1.4;
-      color: var(--ink);
+      font-family: 'EB Garamond', serif; font-size: 1rem;
+      color: var(--ink); line-height: 1.45; margin-bottom: 0.2rem;
     }
-    .pub-authors { font-size: 0.88rem; color: var(--muted); margin-bottom: 0.25rem; }
-    .pub-venue {
-      font-size: 0.82rem;
-      font-style: italic;
-      color: var(--slate);
-      margin-bottom: 0.6rem;
-    }
-    .pub-links { display: flex; gap: 0.8rem; flex-wrap: wrap; }
-    .pub-link {
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--rust);
-      text-decoration: none;
-      border-bottom: 1px solid var(--rust);
-      padding-bottom: 1px;
-      transition: opacity 0.2s;
-    }
-    .pub-link:hover { opacity: 0.7; }
+    .pub-authors { font-size: 0.82rem; color: var(--ink-light); margin-bottom: 0.15rem; }
+    .pub-venue { font-family: 'EB Garamond', serif; font-style: italic; font-size: 0.88rem; color: var(--rust); }
 
     /* ── PROJECTS ── */
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
+    .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 1.5rem; }
     .project-card {
-      background: var(--white);
-      border: 1.5px solid var(--rule);
-      border-radius: 16px;
-      padding: 2rem;
-      transition: box-shadow 0.25s, transform 0.25s;
-      position: relative;
-      overflow: hidden;
+      background: var(--bg2); border: 1px solid var(--rule);
+      overflow: hidden; transition: transform 0.25s, box-shadow 0.25s;
     }
-    .project-card::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--rust), var(--gold));
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 0.3s;
-    }
-    .project-card:hover { box-shadow: 0 12px 40px rgba(196,98,45,0.12); transform: translateY(-4px); }
-    .project-card:hover::after { transform: scaleX(1); }
+    .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+    .project-img { width: 100%; height: 185px; object-fit: cover; display: block; filter: saturate(0.85); }
+    .project-body { padding: 1.3rem; }
     .project-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      color: var(--rust-light);
-      line-height: 1;
-      margin-bottom: 0.8rem;
-      font-weight: 700;
+      font-family: 'DM Sans', sans-serif; font-size: 0.65rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--rust); margin-bottom: 0.3rem;
     }
     .project-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      margin-bottom: 0.6rem;
-      color: var(--ink);
+      font-family: 'EB Garamond', serif; font-size: 1.05rem;
+      color: var(--ink); line-height: 1.35; margin-bottom: 0.55rem;
     }
-    .project-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.2rem; }
-    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .project-desc { font-size: 0.84rem; color: var(--ink-light); line-height: 1.7; margin-bottom: 1rem; }
 
     /* ── CV ── */
-    .cv-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+    .cv-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .cv-block { margin-bottom: 2.2rem; }
+    .cv-block-title {
+      font-family: 'DM Sans', sans-serif; font-size: 0.68rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--rust); margin-bottom: 0.9rem;
+      padding-bottom: 0.4rem; border-bottom: 1px solid var(--rule);
     }
-    .cv-section { margin-bottom: 2.5rem; }
-    .cv-section-title {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--slate);
-      margin-bottom: 1.2rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--slate-light);
-    }
-    .cv-entry { margin-bottom: 1.5rem; }
-    .cv-entry-title { font-weight: 500; font-size: 0.95rem; margin-bottom: 0.15rem; color: var(--ink); }
-    .cv-entry-org { font-size: 0.88rem; color: var(--muted); margin-bottom: 0.1rem; }
-    .cv-entry-date {
-      font-size: 0.78rem;
-      color: var(--rust);
-      letter-spacing: 0.05em;
-      font-weight: 500;
-    }
-    .cv-download { margin-top: 3rem; display: flex; gap: 1rem; }
+    .cv-row { margin-bottom: 1.1rem; }
+    .cv-row-title { font-weight: 500; font-size: 0.9rem; color: var(--ink); }
+    .cv-row-org { font-size: 0.84rem; color: var(--ink-light); }
+    .cv-row-date { font-family: 'EB Garamond', serif; font-style: italic; font-size: 0.9rem; color: var(--ink-light); }
 
     /* ── CONTACT ── */
-    #contact {
-      background: linear-gradient(160deg, var(--slate-dark) 0%, var(--slate) 100%);
-      color: var(--white);
-      position: relative;
-      overflow: hidden;
+    .contact-bg {
+      position: absolute; inset: 0;
+      background: url('photo-montana-meadow.jpg') center / cover no-repeat;
+      filter: brightness(0.2) saturate(0.6);
     }
-    #contact .section-label { color: var(--gold); }
-    #contact .section-title { color: var(--white); }
-    #contact .section-rule { background: linear-gradient(90deg, var(--gold), var(--rust)); }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
-      position: relative; z-index: 1;
+    .contact-inner { position: relative; z-index: 1; }
+    #contact .sec-label { color: rgba(250,248,244,0.45); }
+    #contact .sec-title { color: #fff; }
+    #contact .sec-rule { background: var(--rust); }
+    .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .contact-blurb {
+      font-family: 'EB Garamond', serif; font-style: italic;
+      font-size: 1.1rem; color: rgba(250,248,244,0.6); line-height: 1.8;
     }
-    .contact-intro { color: rgba(255,255,255,0.75); font-size: 1rem; line-height: 1.8; }
-    .contact-links { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 0.6rem; }
     .contact-link {
       display: flex; align-items: center; gap: 1rem;
-      padding: 1.1rem 1.4rem;
-      border: 1.5px solid rgba(255,255,255,0.15);
-      border-radius: 12px;
-      text-decoration: none;
-      color: var(--white);
-      transition: background 0.2s, border-color 0.2s, transform 0.2s;
-      background: rgba(255,255,255,0.05);
+      padding: 0.85rem 1.1rem;
+      border: 1px solid rgba(250,248,244,0.1);
+      text-decoration: none; color: #fff;
+      transition: background 0.2s, border-color 0.2s;
     }
-    .contact-link:hover { background: rgba(255,255,255,0.12); border-color: var(--gold); transform: translateX(4px); }
-    .contact-link-icon { font-size: 1.3rem; }
-    .contact-link-info { display: flex; flex-direction: column; }
-    .contact-link-label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
-    .contact-link-value { font-size: 0.95rem; }
+    .contact-link:hover { background: rgba(250,248,244,0.07); border-color: var(--rust); }
+    .contact-icon { font-size: 1rem; opacity: 0.5; }
+    .contact-info { display: flex; flex-direction: column; }
+    .contact-lbl { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,248,244,0.3); }
+    .contact-val { font-size: 0.88rem; color: rgba(250,248,244,0.8); }
 
     /* ── FOOTER ── */
     footer {
-      background: var(--ink);
-      color: rgba(255,255,255,0.3);
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.82rem;
+      background: var(--ink); border-top: 1px solid rgba(250,248,244,0.06);
+      text-align: center; padding: 1.5rem;
+      font-size: 0.78rem; color: rgba(250,248,244,0.2);
+      font-family: 'DM Sans', sans-serif; letter-spacing: 0.04em;
     }
-    footer a { color: rgba(255,255,255,0.4); }
 
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      33% { transform: translateY(-8px) rotate(1deg); }
-      66% { transform: translateY(-4px) rotate(-1deg); }
-    }
-    .hero-text > * {
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards;
-    }
-    .hero-label   { animation-delay: 0.1s; }
-    .hero-name    { animation-delay: 0.25s; }
-    .hero-tagline { animation-delay: 0.4s; }
-    .hero-meta    { animation-delay: 0.52s; }
-    .btn-row      { animation-delay: 0.65s; }
-    .hero-image-inner { animation: float 6s ease-in-out infinite; }
+    /* ── FADE IN ── */
+    @keyframes up { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+    .hero-text > * { opacity:0; animation: up 0.6s ease forwards; }
+    .hero-eyebrow { animation-delay: 0.1s; }
+    .hero-name    { animation-delay: 0.22s; }
+    .hero-tagline { animation-delay: 0.36s; }
+    .hero-meta    { animation-delay: 0.48s; }
+    .btn-row      { animation-delay: 0.58s; }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
+    @media (max-width: 860px) {
       #hero { grid-template-columns: 1fr; }
-      .hero-image { display: none; }
-      .hero-text { padding: 6rem 6vw 4rem; }
-      .about-grid, .cv-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-photo-col { display: none; }
+      .hero-text { padding: 5rem 7vw 3.5rem; }
+      .about-layout, .cv-layout, .contact-layout { grid-template-columns: 1fr; gap: 2.5rem; }
       .nav-links { display: none; }
-      section { padding: 5rem 6vw; }
+      section { padding: 4rem 6vw; }
     }
   </style>
 </head>
@@ -457,8 +315,9 @@
 
 <!-- HERO -->
 <section id="hero">
+  <div class="hero-bg"></div>
   <div class="hero-text">
-    <p class="hero-label">MS Student · Boise State University</p>
+    <p class="hero-eyebrow">MS Student · Boise State University</p>
     <h1 class="hero-name">Sarah E.<br><em>Scott</em></h1>
     <p class="hero-tagline">Exploring how disease ecology, physiology, and life history interact and shape one another in wild bird populations.</p>
     <div class="hero-meta">
@@ -470,27 +329,35 @@
       <a href="#publications" class="btn btn-outline">View Research</a>
     </div>
   </div>
-  <div class="hero-image">
-    <div class="hero-blob" style="width:350px;height:350px;background:rgba(196,98,45,0.12);top:-80px;right:-80px;"></div>
-    <div class="hero-blob" style="width:250px;height:250px;background:rgba(74,107,138,0.1);bottom:0px;left:-40px;"></div>
-    <img src="kestrel.jpg" alt="American Kestrel illustration" class="hero-kestrel" />
+  <div class="hero-photo-col">
+    <div class="polaroid">
+      <img src="photo-me-kestrel.jpg" alt="Sarah holding an American Kestrel"/>
+      <div class="polaroid-cap">Treasure Valley, 2024</div>
+    </div>
   </div>
 </section>
 
+<!-- PHOTO STRIP -->
+<div class="strip">
+  <img src="photo-kestrel-pair.jpg"      alt="Male and female kestrel"/>
+  <img src="photo-eagle-release.jpg"     alt="Releasing a golden eagle"/>
+  <img src="photo-nestbox-sagebrush.jpg" alt="Nest box in sagebrush, Idaho"/>
+  <img src="photo-kestrel-portrait.jpg"  alt="Kestrel close-up"/>
+  <img src="photo-bluebird-box.jpg"      alt="Mountain bluebird at nest box"/>
+  <img src="photo-montana-snow.jpg"      alt="Snowy pines, Montana"/>
+</div>
+
 <!-- ABOUT -->
 <section id="about">
-  <svg class="section-bird" width="120" height="70" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" style="fill:var(--rust);"><path d="M50 30 C30 10, 5 20, 0 28 C10 24, 25 30, 35 35 C30 40, 28 50, 32 55 C36 48, 42 42, 50 40 C58 42, 64 48, 68 55 C72 50, 70 40, 65 35 C75 30, 90 24, 100 28 C95 20, 70 10, 50 30Z"/></svg>
-  <div class="section-header">
-    <p class="section-label">Who I Am</p>
-    <h2 class="section-title">About Me</h2>
-    <div class="section-rule"></div>
-  </div>
-  <div class="about-grid">
+  <div class="sec-label">Who I Am</div>
+  <h2 class="sec-title">About Me</h2>
+  <div class="sec-rule"></div>
+  <div class="about-layout">
     <div class="about-body">
-      <p>I made my way to research in avian systems through some amazing early opportunities, including surveying breeding Cooper's Hawks in the pine barrens of Wisconsin and Peregrine Falcons on the tundra in Greenland. I completed my B.S. in Biology at the University of Wisconsin–Stevens Point, then worked as a seasonal technician for the Institute for Bird Populations, Intermountain Bird Observatory, and Raptorview Research Institute before spending several years with the University of Arizona, where I worked in the Badyaev and Duckworth Labs on long-running research projects in Missoula, Montana and Tucson, Arizona. It was there that I developed my own research project — assessing network dynamics and temporal trends of avian pox in an urban house finch population — and where my interests in life history and disease ecology really clicked.</p>
-      <p>I am currently a Master's student in the Heath Lab at Boise State, studying infection dynamics in a partial migrant population of American Kestrels. I want to know how environment and individual characteristics — like whether a bird migrates or stays put — shape who gets infected, how intensely, and whether naturally occurring infections carry measurable costs at any level.</p>
+      <p>I made my way to research in avian systems through some amazing early opportunities, including surveying breeding Cooper's Hawks in the pine barrens of Wisconsin and Peregrine Falcons on the tundra in Greenland. I completed my B.S. in Biology at the University of Wisconsin–Stevens Point, then worked as a seasonal technician for the Institute for Bird Populations, Intermountain Bird Observatory, and Raptorview Research Institute before spending several years with the University of Arizona, where I worked in the Badyaev and Duckworth Labs on long-running research projects in Missoula, Montana and Tucson, Arizona. It was there that I first developed my own research project — assessing network dynamics and temporal trends of avian pox in an urban house finch population — and where my interests in life history and disease ecology really clicked.</p>
+      <p>I am currently a Master's student in the Heath Lab at Boise State, studying infection dynamics in a partial migrant population of American Kestrels. I want to know how environment and individual characteristics — like whether a bird migrates or stays put — shape who gets infected, how intensely, and whether these naturally-occurring infections carry measurable costs at chronic levels.</p>
       <p>Outside of research, I'm usually either deep in a Brandon Sanderson novel, out on a hike with my dog Darby, or at my local independent movie theater.</p>
-      <div class="interests-list">
+      <div class="tags">
         <span class="tag">Disease Ecology</span>
         <span class="tag">Avian Biology</span>
         <span class="tag">Life History Theory</span>
@@ -499,7 +366,9 @@
         <span class="tag">Ecology</span>
       </div>
     </div>
-    <div class="about-sidebar">
+    <div>
+      <img class="about-photo" src="photo-me-field.png" alt="Sarah in the field"/>
+      <span class="photo-cap">somewhere in the Treasure Valley, probably looking for kestrels</span>
       <div class="info-card">
         <h4>Affiliation</h4>
         <p>Boise State University</p>
@@ -509,15 +378,19 @@
       <div class="info-card">
         <h4>Education</h4>
         <ul>
-          <li>M.S. Raptor Biology — Boise State University, 2023–Present</li>
+          <li>M.S. Raptor Biology — Boise State, 2023–Present</li>
           <li>B.S. Biology — UW–Stevens Point, 2014–2017</li>
         </ul>
       </div>
       <div class="info-card">
         <h4>Profiles</h4>
         <ul>
-          <li><a href="https://orcid.org/0009-0003-4957-9201" target="_blank" style="color:var(--accent);text-decoration:none;">ORCID ↗</a></li>
+          <li><a href="https://orcid.org/0009-0003-4957-9201" target="_blank" style="color:var(--rust);text-decoration:none;">ORCID ↗</a></li>
         </ul>
+      </div>
+      <div class="eggs-wrap">
+        <img src="photo-kestrel-eggs.jpg" alt="Kestrel eggs in nest box"/>
+        <span>kestrel eggs — Treasure Valley, 2024</span>
       </div>
     </div>
   </div>
@@ -525,164 +398,153 @@
 
 <!-- PUBLICATIONS -->
 <section id="publications">
-  <div class="section-header">
-    <p class="section-label">Scholarly Work</p>
-    <h2 class="section-title">Publications & Presentations</h2>
-    <div class="section-rule"></div>
+  <div class="sec-label">Scholarly Work</div>
+  <h2 class="sec-title">Publications & Presentations</h2>
+  <div class="sec-rule"></div>
+
+  <div class="pub-sub">Publications</div>
+  <div class="pub-item">
+    <div class="pub-yr">2025</div>
+    <div>
+      <div class="pub-title">Spiders as sentinels of mercury contamination in High Arctic lentic ecosystems and risk to arachnivorous birds</div>
+      <div class="pub-authors">Strang BN, Chumchal M, Burnham K, Middlebrooks C, Hannappel M, Barst B, Kennedy J, Myers K, <strong>Scott S</strong>, Appel A, Katzenmeyer B, Sullivan E, Viscioni-Wilson LD, Heine R, Schmeder I, Allender C, Capone M, Williams T</div>
+      <div class="pub-venue"><em>Environmental Toxicology and Chemistry</em> — In Review</div>
+    </div>
   </div>
 
-  <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; margin-bottom:1.5rem; color:var(--muted); letter-spacing:0.05em;">Publications</h3>
-  <div class="pub-list">
+  <div class="pub-sub">Conference Presentations</div>
 
-    <div class="pub-item">
-      <div class="pub-year">2025</div>
-      <div class="pub-content">
-        <div class="pub-title">Spiders as sentinels of mercury contamination in High Arctic lentic ecosystems and risk to arachnivorous birds</div>
-        <div class="pub-authors">Strang BN, Chumchal M, Burnham K, Middlebrooks C, Hannappel M, Barst B, Kennedy J, Myers K, <strong>Scott S</strong>, Appel A, Katzenmeyer B, Sullivan E, Viscioni-Wilson LD, Heine R, Schmeder I, Allender C, Capone M, Williams T</div>
-        <div class="pub-venue"><em>Environmental Toxicology and Chemistry</em> — In Review</div>
-        <div class="pub-links"></div>
-      </div>
+  <div class="pub-item">
+    <div class="pub-yr">2026</div>
+    <div>
+      <div class="pub-title">Excellence in Graduate Mentoring Panel: Practices That Make a Difference</div>
+      <div class="pub-authors"><strong>Scott SE</strong> (Invited Panelist)</div>
+      <div class="pub-venue">Boise State University · Boise, ID · Invited Talk</div>
     </div>
-
   </div>
-
-  <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; margin-top:3.5rem; margin-bottom:1.5rem; color:var(--muted); letter-spacing:0.05em;">Conference Presentations</h3>
-  <div class="pub-list">
-
-    <div class="pub-item">
-      <div class="pub-year">2025</div>
-      <div class="pub-content">
-        <div class="pub-title">Investigating Migration Strategies, Haemosporidian Infection, and Fitness Consequences in a Partial Migrant Population</div>
-        <div class="pub-authors"><strong>Scott SE</strong> (presenter), Galla SJ, Hudon SF, Simler-Williamson AB, Heath JA</div>
-        <div class="pub-venue">Raptor Research Foundation Annual Conference · San José, Costa Rica · Oral Presentation</div>
-      </div>
+  <div class="pub-item">
+    <div class="pub-yr">2026</div>
+    <div>
+      <div class="pub-title">Investigating Migration Strategies, Haemosporidian Infection, and Fitness Consequences in a Partial Migrant Population</div>
+      <div class="pub-authors"><strong>Scott SE</strong> (presenter), Galla SJ, Hudon SF, Simler-Williamson AB, Heath JA</div>
+      <div class="pub-venue">Society for Integrative and Comparative Biology · Portland, OR · Poster</div>
     </div>
-
-    <div class="pub-item">
-      <div class="pub-year">2025</div>
-      <div class="pub-content">
-        <div class="pub-title">Investigating Migration Strategies, Haemosporidian Infection, and Fitness Consequences in a Partial Migrant Population</div>
-        <div class="pub-authors"><strong>Scott SE</strong> (presenter), Heath JA</div>
-        <div class="pub-venue">Association of Field Ornithologists Annual Conference · Ogden, UT · Oral Presentation</div>
-      </div>
+  </div>
+  <div class="pub-item">
+    <div class="pub-yr">2025</div>
+    <div>
+      <div class="pub-title">Investigating Migration Strategies, Haemosporidian Infection, and Fitness Consequences in a Partial Migrant Population</div>
+      <div class="pub-authors"><strong>Scott SE</strong> (presenter), Galla SJ, Hudon SF, Simler-Williamson AB, Heath JA</div>
+      <div class="pub-venue">Raptor Research Foundation Annual Conference · San José, Costa Rica · Oral Presentation</div>
     </div>
-
-    <div class="pub-item">
-      <div class="pub-year">2025</div>
-      <div class="pub-content">
-        <div class="pub-title">Historical Prevalence of Haemosporidian Parasites and Telomere Dynamics in a Partial Migrant Population of American Kestrels</div>
-        <div class="pub-authors"><strong>Scott SE</strong> (presenter), Heath JA</div>
-        <div class="pub-venue">Boise State University Graduate Student Showcase · Boise, ID · Poster</div>
-      </div>
+  </div>
+  <div class="pub-item">
+    <div class="pub-yr">2025</div>
+    <div>
+      <div class="pub-title">Investigating Migration Strategies, Haemosporidian Infection, and Fitness Consequences in a Partial Migrant Population</div>
+      <div class="pub-authors"><strong>Scott SE</strong> (presenter), Heath JA</div>
+      <div class="pub-venue">Association of Field Ornithologists Annual Conference · Ogden, UT · Oral Presentation</div>
     </div>
-
-    <div class="pub-item">
-      <div class="pub-year">2025</div>
-      <div class="pub-content">
-        <div class="pub-title">How Does Irrigation Affect American Kestrel (Falco sparverius) Nest Site Selection and Parasite Infection</div>
-        <div class="pub-authors">Piedmont IC (presenter), <strong>Scott SE</strong>, Hutchinson MG, Low SA, Heath JA</div>
-        <div class="pub-venue">Idaho Conference on Undergraduate Research · Boise, ID · Poster</div>
-      </div>
+  </div>
+  <div class="pub-item">
+    <div class="pub-yr">2025</div>
+    <div>
+      <div class="pub-title">Historical Prevalence of Haemosporidian Parasites and Telomere Dynamics in a Partial Migrant Population of American Kestrels</div>
+      <div class="pub-authors"><strong>Scott SE</strong> (presenter), Heath JA</div>
+      <div class="pub-venue">Boise State University Graduate Student Showcase · Boise, ID · Poster</div>
     </div>
-
-    <div class="pub-item">
-      <div class="pub-year">2025</div>
-      <div class="pub-content">
-        <div class="pub-title">Effects on Incubation Behavior in American Kestrels (Falco sparverius)</div>
-        <div class="pub-authors">Hutchinson MG (presenter), <strong>Scott SE</strong>, Reynard L, Heath JA</div>
-        <div class="pub-venue">Boise State University Undergraduate Research Symposium · Boise, ID · Poster</div>
-      </div>
+  </div>
+  <div class="pub-item">
+    <div class="pub-yr">2025</div>
+    <div>
+      <div class="pub-title">How Does Irrigation Affect American Kestrel (Falco sparverius) Nest Site Selection and Parasite Infection</div>
+      <div class="pub-authors">Piedmont IC (presenter), <strong>Scott SE</strong>, Hutchinson MG, Low SA, Heath JA</div>
+      <div class="pub-venue">Idaho Conference on Undergraduate Research · Boise, ID · Poster</div>
     </div>
-
-    <div class="pub-item">
-      <div class="pub-year">2024</div>
-      <div class="pub-content">
-        <div class="pub-title">Historical Prevalence of Haemosporidian Parasites and Telomere Dynamics in a Partial Migrant Population of American Kestrels</div>
-        <div class="pub-authors"><strong>Scott SE</strong> (presenter), Heath JA</div>
-        <div class="pub-venue">American Ornithological Society Annual Conference · Estes Park, CO · Poster</div>
-      </div>
+  </div>
+  <div class="pub-item">
+    <div class="pub-yr">2025</div>
+    <div>
+      <div class="pub-title">Effects on Incubation Behavior in American Kestrels (Falco sparverius)</div>
+      <div class="pub-authors">Hutchinson MG (presenter), <strong>Scott SE</strong>, Reynard L, Heath JA</div>
+      <div class="pub-venue">Boise State University Undergraduate Research Symposium · Boise, ID · Poster</div>
     </div>
-
-    <div class="pub-item">
-      <div class="pub-year">2023</div>
-      <div class="pub-content">
-        <div class="pub-title">Migration Strategies and Morphology of American Kestrels</div>
-        <div class="pub-authors">Hutchinson MG (presenter), <strong>Scott SE</strong> (presenter), Heath JA</div>
-        <div class="pub-venue">Raptor Research Foundation Annual Conference · Albuquerque, NM · Poster</div>
-      </div>
+  </div>
+  <div class="pub-item">
+    <div class="pub-yr">2024</div>
+    <div>
+      <div class="pub-title">Historical Prevalence of Haemosporidian Parasites and Telomere Dynamics in a Partial Migrant Population of American Kestrels</div>
+      <div class="pub-authors"><strong>Scott SE</strong> (presenter), Heath JA</div>
+      <div class="pub-venue">American Ornithological Society Annual Conference · Estes Park, CO · Poster</div>
     </div>
-
+  </div>
+  <div class="pub-item">
+    <div class="pub-yr">2023</div>
+    <div>
+      <div class="pub-title">Migration Strategies and Morphology of American Kestrels</div>
+      <div class="pub-authors">Hutchinson MG (presenter), <strong>Scott SE</strong> (presenter), Heath JA</div>
+      <div class="pub-venue">Raptor Research Foundation Annual Conference · Albuquerque, NM · Poster</div>
+    </div>
   </div>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="section-header">
-    <p class="section-label">Active Work</p>
-    <h2 class="section-title">Research Projects</h2>
-    <div class="section-rule"></div>
-  </div>
+  <div class="sec-label">Active Work</div>
+  <h2 class="sec-title">Research Projects</h2>
+  <div class="sec-rule"></div>
   <div class="project-grid">
 
     <div class="project-card">
-      <div class="project-num">01</div>
-      <div class="project-title">Haemosporidian Infection Dynamics in American Kestrels</div>
-      <p class="project-desc">My M.S. research focuses on infection dynamics in a banded, monitored nest box population of American Kestrels in the Treasure Valley of SW Idaho. I'm asking how environment and individual characteristics — including migration strategy — shape infection prevalence and intensity of Haemoproteus, Leucocytozoon, and Plasmodium, and whether naturally occurring infections carry measurable costs. Outcomes tracked include reproductive success, body condition, circulating carotenoids, and relative telomere length across multiple seasons of trapping, blood sampling, and nest monitoring.</p>
-      <div class="project-tags">
-        <span class="tag">Disease Ecology</span>
-        <span class="tag">Haemosporidians</span>
-        <span class="tag">Partial Migration</span>
-        <span class="tag">Telomere Biology</span>
-        <span class="tag">American Kestrel</span>
+      <img class="project-img" src="photo-kestrel-pair.jpg" alt="Male and female kestrel"/>
+      <div class="project-body">
+        <div class="project-num">01</div>
+        <div class="project-title">Haemosporidian Infection Dynamics in American Kestrels</div>
+        <p class="project-desc">My M.S. research focuses on infection dynamics in a banded, monitored nest box population of American Kestrels in the Treasure Valley of SW Idaho. I'm asking how environment and individual characteristics — including migration strategy — shape infection prevalence and intensity, and whether naturally occurring infections carry measurable costs to reproductive success, body condition, carotenoids, and telomere length.</p>
+        <div class="tags"><span class="tag">Disease Ecology</span><span class="tag">Haemosporidians</span><span class="tag">Partial Migration</span><span class="tag">Telomeres</span></div>
       </div>
     </div>
 
     <div class="project-card">
-      <div class="project-num">02</div>
-      <div class="project-title">Life History & Disease in Western Songbirds — Badyaev & Duckworth Labs, U of A</div>
-      <p class="project-desc">As a research assistant and lead banding technician on long-running projects in Missoula, MT and Tucson, AZ, I worked with Western and Mountain Bluebird populations and House Finches across multiple field seasons. Within the Badyaev Lab, I developed an independent project assessing network dynamics and temporal trends of avian pox in an urban house finch population — the work that first crystallized my interests in life history and disease ecology.</p>
-      <div class="project-tags">
-        <span class="tag">Avian Pox</span>
-        <span class="tag">House Finch</span>
-        <span class="tag">Bluebirds</span>
-        <span class="tag">Network Dynamics</span>
-        <span class="tag">Long-term Study</span>
+      <img class="project-img" src="photo-finch-bark.jpg" alt="House finch in hand"/>
+      <div class="project-body">
+        <div class="project-num">02</div>
+        <div class="project-title">Life History & Disease in Western Songbirds</div>
+        <p class="project-desc">As a research assistant and lead banding technician with the Badyaev and Duckworth Labs at the University of Arizona, I worked with Western and Mountain Bluebird populations and House Finches across multiple field seasons. Within the Badyaev Lab, I developed an independent project assessing network dynamics and temporal trends of avian pox in an urban house finch population.</p>
+        <div class="tags"><span class="tag">Avian Pox</span><span class="tag">House Finch</span><span class="tag">Bluebirds</span><span class="tag">Long-term Study</span></div>
+      </div>
+    </div>
+
+    <div class="project-card greenland-card" onclick="openGallery()" style="cursor:pointer;">
+      <div style="position:relative;">
+        <img class="project-img" src="gl_IMG_3277.JPG" alt="Greenland fieldwork"/>
+        <div style="position:absolute;bottom:0.6rem;right:0.6rem;background:rgba(0,0,0,0.55);color:#fff;font-family:'DM Sans',sans-serif;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.3rem 0.6rem;border-radius:2px;">View Gallery ↗</div>
+      </div>
+      <div class="project-body">
+        <div class="project-num">03</div>
+        <div class="project-title">Arctic Field Research — Greenland</div>
+        <p class="project-desc">Conducted breeding bird surveys and biological sample collection in northwestern Greenland, focusing on seabirds, raptors, and passerines. Contributed to the mercury contamination study currently in review at Environmental Toxicology and Chemistry, and processed nest camera data for the High Arctic Institute.</p>
+        <div class="tags"><span class="tag">Arctic Ecology</span><span class="tag">Peregrine Falcon</span><span class="tag">Mercury</span></div>
       </div>
     </div>
 
     <div class="project-card">
-      <div class="project-num">03</div>
-      <div class="project-title">Arctic Field Research — Greenland</div>
-      <p class="project-desc">Conducted breeding bird surveys and biological sample collection in northwestern Greenland, focusing on seabirds, raptors, and passerines. Work included assisting with emergent insect trap construction, aquatic insect collection, and tundra plant identification — and contributed data to the mercury contamination study currently in review at Environmental Toxicology and Chemistry.</p>
-      <div class="project-tags">
-        <span class="tag">Arctic Ecology</span>
-        <span class="tag">Peregrine Falcon</span>
-        <span class="tag">Field Surveys</span>
-        <span class="tag">Mercury Contamination</span>
+      <img class="project-img" src="photo-eagle-release.jpg" alt="Golden eagle release, Montana"/>
+      <div class="project-body">
+        <div class="project-num">04</div>
+        <div class="project-title">Raptor Migration Monitoring</div>
+        <p class="project-desc">Seasonal field technician work across multiple migration monitoring projects — Golden Eagle migration counts and banding in Montana with Raptorview Research Institute, and diurnal raptor banding and migration counts with Intermountain Bird Observatory during fall migration.</p>
+        <div class="tags"><span class="tag">Golden Eagle</span><span class="tag">Migration</span><span class="tag">Banding</span></div>
       </div>
     </div>
 
     <div class="project-card">
-      <div class="project-num">04</div>
-      <div class="project-title">Raptor Migration Monitoring</div>
-      <p class="project-desc">Seasonal field technician work across multiple migration monitoring projects: Golden Eagle migration counts and banding in Montana with Raptorview Research Institute, and diurnal raptor banding and migration counts with Intermountain Bird Observatory as part of a multi-functional fall migration crew.</p>
-      <div class="project-tags">
-        <span class="tag">Golden Eagle</span>
-        <span class="tag">Migration</span>
-        <span class="tag">Banding</span>
-        <span class="tag">Raptors</span>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-num">05</div>
-      <div class="project-title">Additional Field Experience</div>
-      <p class="project-desc">Willow Flycatcher and North American Beaver surveys in wetland habitats with the Institute for Bird Populations; Cooper's Hawk observation and banding as part of a summer raptor ecology field course at UWSP; and environmental education and outreach with Southern Wisconsin Bird Alliance.</p>
-      <div class="project-tags">
-        <span class="tag">Willow Flycatcher</span>
-        <span class="tag">Cooper's Hawk</span>
-        <span class="tag">Field Surveys</span>
-        <span class="tag">Outreach</span>
+      <img class="project-img" src="photo-montana-meadow.jpg" alt="Montana wildflower meadow"/>
+      <div class="project-body">
+        <div class="project-num">05</div>
+        <div class="project-title">Additional Field Experience</div>
+        <p class="project-desc">Willow Flycatcher and North American Beaver surveys in wetland habitats with the Institute for Bird Populations; Cooper's Hawk observation and banding at UWSP; and environmental education and outreach with Southern Wisconsin Bird Alliance.</p>
+        <div class="tags"><span class="tag">Willow Flycatcher</span><span class="tag">Cooper's Hawk</span><span class="tag">Field Surveys</span><span class="tag">Outreach</span></div>
       </div>
     </div>
 
@@ -691,197 +553,255 @@
 
 <!-- CV -->
 <section id="cv">
-  <div class="section-header">
-    <p class="section-label">Background</p>
-    <h2 class="section-title">Curriculum Vitae</h2>
-    <div class="section-rule"></div>
-  </div>
-  <div class="cv-grid">
+  <div class="sec-label">Background</div>
+  <h2 class="sec-title">Curriculum Vitae</h2>
+  <div class="sec-rule"></div>
+  <div class="cv-layout">
     <div>
-      <div class="cv-section">
-        <div class="cv-section-title">Education</div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">M.S. in Raptor Biology</div>
-          <div class="cv-entry-org">Boise State University, Dept. of Biological Sciences</div>
-          <div class="cv-entry-date">2023 — Present</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">B.S. in Biology</div>
-          <div class="cv-entry-org">University of Wisconsin–Stevens Point</div>
-          <div class="cv-entry-date">2014 — 2017</div>
-        </div>
+      <div class="cv-block">
+        <div class="cv-block-title">Education</div>
+        <div class="cv-row"><div class="cv-row-title">M.S. in Raptor Biology</div><div class="cv-row-org">Boise State University, Dept. of Biological Sciences</div><div class="cv-row-date">2023 — Present</div></div>
+        <div class="cv-row"><div class="cv-row-title">B.S. in Biology</div><div class="cv-row-org">University of Wisconsin–Stevens Point</div><div class="cv-row-date">2014 — 2017</div></div>
       </div>
-      <div class="cv-section">
-        <div class="cv-section-title">Grants & Awards</div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">American Ornithological Society Student Research Grant</div>
-          <div class="cv-entry-date">2025 · $4,000</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">Western Field Ornithologists Research Grant</div>
-          <div class="cv-entry-date">2025 · $1,500</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">Raptor Research Center McCaslin Scholarship</div>
-          <div class="cv-entry-date">2025 · $2,500</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">Raptor Research Center Trustee Fellowship in Raptor Biology</div>
-          <div class="cv-entry-date">2024, 2025 · $1,500 each</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">BSU Michael W. Butler Ecological Research Award</div>
-          <div class="cv-entry-date">2025 · $3,000</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">Association of Field Ornithologists Travel Award</div>
-          <div class="cv-entry-date">2025 · $900</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">BSU Dan Montgomery Graduate Student Award</div>
-          <div class="cv-entry-date">2024 · $3,000</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">Association of Field Ornithologists Bergstrom Research Grant</div>
-          <div class="cv-entry-date">2024 · $1,500</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">NSF Research Experience for Post-Baccalaureate Students (REPS)</div>
-          <div class="cv-entry-org">Supplement to NSF LTREB Grant · Alex Badyaev, PI</div>
-          <div class="cv-entry-date">2020</div>
-        </div>
+      <div class="cv-block">
+        <div class="cv-block-title">Grants & Awards</div>
+        <div class="cv-row"><div class="cv-row-title">American Ornithological Society Student Research Grant</div><div class="cv-row-date">2025 · $4,000</div></div>
+        <div class="cv-row"><div class="cv-row-title">Western Field Ornithologists Research Grant</div><div class="cv-row-date">2025 · $1,500</div></div>
+        <div class="cv-row"><div class="cv-row-title">Raptor Research Center McCaslin Scholarship</div><div class="cv-row-date">2025 · $2,500</div></div>
+        <div class="cv-row"><div class="cv-row-title">Raptor Research Center Trustee Fellowship in Raptor Biology</div><div class="cv-row-date">2024, 2025 · $1,500 each</div></div>
+        <div class="cv-row"><div class="cv-row-title">BSU Michael W. Butler Ecological Research Award</div><div class="cv-row-date">2025 · $3,000</div></div>
+        <div class="cv-row"><div class="cv-row-title">Association of Field Ornithologists Travel Award</div><div class="cv-row-date">2025 · $900</div></div>
+        <div class="cv-row"><div class="cv-row-title">BSU Dan Montgomery Graduate Student Award</div><div class="cv-row-date">2024 · $3,000</div></div>
+        <div class="cv-row"><div class="cv-row-title">Association of Field Ornithologists Bergstrom Research Grant</div><div class="cv-row-date">2024 · $1,500</div></div>
+        <div class="cv-row"><div class="cv-row-title">NSF Research Experience for Post-Baccalaureate Students (REPS)</div><div class="cv-row-org">Supplement to NSF LTREB Grant · Alex Badyaev, PI</div><div class="cv-row-date">2020</div></div>
       </div>
-      <div class="cv-section">
-        <div class="cv-section-title">Mentoring Awards</div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">Dept. of Biological Sciences Graduate Student Mentoring Award — Honorable Mention</div>
-          <div class="cv-entry-date">2025</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">BSU Graduate College Excellence in Graduate Mentoring — Honorable Mention</div>
-          <div class="cv-entry-date">2025</div>
-        </div>
+      <div class="cv-block">
+        <div class="cv-block-title">Mentoring Awards</div>
+        <div class="cv-row"><div class="cv-row-title">Dept. of Biological Sciences Graduate Student Mentoring Award — Honorable Mention</div><div class="cv-row-date">2025</div></div>
+        <div class="cv-row"><div class="cv-row-title">BSU Graduate College Excellence in Graduate Mentoring — Honorable Mention</div><div class="cv-row-date">2025</div></div>
       </div>
     </div>
     <div>
-      <div class="cv-section">
-        <div class="cv-section-title">Research Experience</div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">Research Technician — Heath Lab</div>
-          <div class="cv-entry-org">Boise State University</div>
-          <div class="cv-entry-date">2023 — Present</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">Research Assistant — Badyaev Lab</div>
-          <div class="cv-entry-org">University of Arizona</div>
-          <div class="cv-entry-date">2019 — 2023</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">Lead Banding Assistant — Duckworth Lab</div>
-          <div class="cv-entry-org">University of Arizona</div>
-          <div class="cv-entry-date">2019 — 2022</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">Migration Technician</div>
-          <div class="cv-entry-org">Raptorview Research Institute</div>
-          <div class="cv-entry-date">2022</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">Research Technician — High Arctic Institute</div>
-          <div class="cv-entry-org">Greenland</div>
-          <div class="cv-entry-date">2022</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">Multi-purpose Trainee</div>
-          <div class="cv-entry-org">Intermountain Bird Observatory</div>
-          <div class="cv-entry-date">2020</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">LTE Field Technician</div>
-          <div class="cv-entry-org">Institute for Bird Populations</div>
-          <div class="cv-entry-date">2018</div>
-        </div>
+      <div class="cv-block">
+        <div class="cv-block-title">Research Experience</div>
+        <div class="cv-row"><div class="cv-row-title">Research Technician — Heath Lab</div><div class="cv-row-org">Boise State University</div><div class="cv-row-date">2023 — Present</div></div>
+        <div class="cv-row"><div class="cv-row-title">Research Assistant — Badyaev Lab</div><div class="cv-row-org">University of Arizona</div><div class="cv-row-date">2019 — 2023</div></div>
+        <div class="cv-row"><div class="cv-row-title">Lead Banding Assistant — Duckworth Lab</div><div class="cv-row-org">University of Arizona</div><div class="cv-row-date">2019 — 2022</div></div>
+        <div class="cv-row"><div class="cv-row-title">Migration Technician</div><div class="cv-row-org">Raptorview Research Institute</div><div class="cv-row-date">2022</div></div>
+        <div class="cv-row"><div class="cv-row-title">Research Technician — High Arctic Institute</div><div class="cv-row-org">Greenland</div><div class="cv-row-date">2022</div></div>
+        <div class="cv-row"><div class="cv-row-title">Multi-purpose Trainee</div><div class="cv-row-org">Intermountain Bird Observatory</div><div class="cv-row-date">2020</div></div>
+        <div class="cv-row"><div class="cv-row-title">LTE Field Technician</div><div class="cv-row-org">Institute for Bird Populations</div><div class="cv-row-date">2018</div></div>
       </div>
-      <div class="cv-section">
-        <div class="cv-section-title">Teaching</div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">Graduate Teaching Assistant/Instructor</div>
-          <div class="cv-entry-org">Boise State University</div>
-          <div class="cv-entry-date">2023 — Present</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">VIP: Biology of Migratory Birds (Disease Ecology module)</div>
-          <div class="cv-entry-date">2024 — Present</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">BIOL 227: Anatomy and Physiology Lab</div>
-          <div class="cv-entry-date">2023 — Present</div>
-        </div>
+      <div class="cv-block">
+        <div class="cv-block-title">Teaching</div>
+        <div class="cv-row"><div class="cv-row-title">Graduate Teaching Assistant/Instructor</div><div class="cv-row-org">Boise State University</div><div class="cv-row-date">2023 — Present</div></div>
+        <div class="cv-row"><div class="cv-row-title">VIP: Biology of Migratory Birds (Disease Ecology module)</div><div class="cv-row-date">2024 — Present</div></div>
+        <div class="cv-row"><div class="cv-row-title">BIOL 227: Anatomy and Physiology Lab</div><div class="cv-row-date">2023 — Present</div></div>
       </div>
-      <div class="cv-section">
-        <div class="cv-section-title">Professional Societies</div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">Society of Integrative and Comparative Biology</div>
-          <div class="cv-entry-date">2025 — Present</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">American Ornithological Society</div>
-          <div class="cv-entry-date">2024 — Present</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">Association of Field Ornithologists</div>
-          <div class="cv-entry-date">2024 — Present</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">Raptor Research Foundation</div>
-          <div class="cv-entry-date">2023 — Present</div>
-        </div>
-        <div class="cv-entry">
-          <div class="cv-entry-title">Western Field Ornithologists</div>
-          <div class="cv-entry-date">2025 — Present</div>
-        </div>
+      <div class="cv-block">
+        <div class="cv-block-title">Professional Societies</div>
+        <div class="cv-row"><div class="cv-row-title">Society of Integrative and Comparative Biology</div><div class="cv-row-date">2025 — Present</div></div>
+        <div class="cv-row"><div class="cv-row-title">American Ornithological Society</div><div class="cv-row-date">2024 — Present</div></div>
+        <div class="cv-row"><div class="cv-row-title">Association of Field Ornithologists</div><div class="cv-row-date">2024 — Present</div></div>
+        <div class="cv-row"><div class="cv-row-title">Raptor Research Foundation</div><div class="cv-row-date">2023 — Present</div></div>
+        <div class="cv-row"><div class="cv-row-title">Western Field Ornithologists</div><div class="cv-row-date">2025 — Present</div></div>
       </div>
     </div>
   </div>
-  <div class="cv-download">
+  <div style="margin-top:2.5rem;">
     <a href="sarah-scott-cv.pdf" target="_blank" class="btn btn-primary">Download Full CV (PDF)</a>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-  <!-- background birds -->
-  <svg style="position:absolute;top:10%;right:5%;opacity:0.07;fill:white;pointer-events:none;" width="160" height="95" viewBox="0 0 100 60"><path d="M50 30 C30 10, 5 20, 0 28 C10 24, 25 30, 35 35 C30 40, 28 50, 32 55 C36 48, 42 42, 50 40 C58 42, 64 48, 68 55 C72 50, 70 40, 65 35 C75 30, 90 24, 100 28 C95 20, 70 10, 50 30Z"/></svg>
-  <svg style="position:absolute;bottom:15%;left:8%;opacity:0.05;fill:white;pointer-events:none;" width="80" height="48" viewBox="0 0 60 35"><path d="M30 17 C20 6, 3 12, 0 16 C6 14, 15 18, 21 21 C18 25, 17 30, 19 33 C22 28, 26 24, 30 23 C34 24, 38 28, 41 33 C43 30, 42 25, 39 21 C45 18, 54 14, 60 16 C57 12, 40 6, 30 17Z"/></svg>
-  <div class="section-header">
-    <p class="section-label">Get in Touch</p>
-    <h2 class="section-title">Contact</h2>
-    <div class="section-rule"></div>
-  </div>
-  <div class="contact-grid">
-    <div>
-      <p class="contact-intro">Always happy to chat about research, birds, or potential collaborations. Don't hesitate to get in touch!</p>
+  <div class="contact-bg"></div>
+  <div class="contact-inner">
+    <div class="sec-label">Get in Touch</div>
+    <h2 class="sec-title">Contact</h2>
+    <div class="sec-rule"></div>
+    <div class="contact-layout">
+      <div>
+        <p class="contact-blurb">Always happy to chat about research, birds, or potential collaborations. Don't hesitate to get in touch!</p>
+      </div>
       <div class="contact-links">
         <a href="mailto:sarahscott390@u.boisestate.edu" class="contact-link">
-          <span class="contact-link-icon">✉</span>
-          <span class="contact-link-info">
-            <span class="contact-link-label">Email</span>
-            <span class="contact-link-value">sarahscott390 [at] u.boisestate.edu</span>
-          </span>
+          <span class="contact-icon">✉</span>
+          <span class="contact-info"><span class="contact-lbl">Email</span><span class="contact-val">sarahscott390 [at] u.boisestate.edu</span></span>
         </a>
-        <a href="#" class="contact-link">
-          <span class="contact-link-icon">💼</span>
-          <span class="contact-link-info">
-            <span class="contact-link-label">Office</span>
-            <span class="contact-link-value">Department of Biological Sciences, Boise State University</span>
-          </span>
+        <a href="https://orcid.org/0009-0003-4957-9201" target="_blank" class="contact-link">
+          <span class="contact-icon">↗</span>
+          <span class="contact-info"><span class="contact-lbl">ORCID</span><span class="contact-val">0009-0003-4957-9201</span></span>
         </a>
+        <span class="contact-link">
+          <span class="contact-icon">◎</span>
+          <span class="contact-info"><span class="contact-lbl">Office</span><span class="contact-val">Department of Biological Sciences, Boise State University</span></span>
+        </span>
       </div>
-    </div>
-    <div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<f
+<footer>© 2025 Sarah E. Scott · hosted on GitHub Pages</footer>
+
+<!-- GREENLAND GALLERY LIGHTBOX -->
+<div id="gallery-overlay" style="display:none;" onclick="handleOverlayClick(event)">
+  <div id="gallery-modal">
+    <div id="gallery-header">
+      <div>
+        <div id="gallery-title">Arctic Field Research — Greenland, 2022</div>
+        <div id="gallery-counter"></div>
+      </div>
+      <button id="gallery-close" onclick="closeGallery()">✕</button>
+    </div>
+    <div id="gallery-main">
+      <button class="gallery-nav" id="gallery-prev" onclick="changePhoto(-1)">‹</button>
+      <img id="gallery-img" src="" alt="Greenland fieldwork"/>
+      <button class="gallery-nav" id="gallery-next" onclick="changePhoto(1)">›</button>
+    </div>
+    <div id="gallery-thumbs"></div>
+  </div>
+</div>
+
+<style>
+  #gallery-overlay {
+    position: fixed; inset: 0; z-index: 500;
+    background: rgba(20,16,10,0.92);
+    display: flex; align-items: center; justify-content: center;
+    padding: 1.5rem;
+  }
+  #gallery-modal {
+    background: #fff;
+    max-width: 860px; width: 100%;
+    max-height: 90vh;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  #gallery-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 1.4rem;
+    border-bottom: 1px solid var(--rule);
+    flex-shrink: 0;
+  }
+  #gallery-title {
+    font-family: 'EB Garamond', serif; font-size: 1.1rem;
+    font-style: italic; color: var(--ink);
+  }
+  #gallery-counter {
+    font-family: 'DM Sans', sans-serif; font-size: 0.72rem;
+    letter-spacing: 0.08em; color: var(--ink-light); margin-top: 0.1rem;
+  }
+  #gallery-close {
+    background: none; border: none; cursor: pointer;
+    font-size: 1.1rem; color: var(--ink-light);
+    padding: 0.3rem 0.5rem; transition: color 0.2s;
+  }
+  #gallery-close:hover { color: var(--rust); }
+  #gallery-main {
+    position: relative; flex: 1;
+    display: flex; align-items: center; justify-content: center;
+    background: #111; min-height: 0; overflow: hidden;
+  }
+  #gallery-img {
+    max-width: 100%; max-height: 100%;
+    object-fit: contain; display: block;
+    transition: opacity 0.2s;
+  }
+  .gallery-nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(255,255,255,0.12); border: none;
+    color: #fff; font-size: 2rem; width: 48px; height: 64px;
+    cursor: pointer; transition: background 0.2s;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2;
+  }
+  .gallery-nav:hover { background: rgba(255,255,255,0.25); }
+  #gallery-prev { left: 0; }
+  #gallery-next { right: 0; }
+  #gallery-thumbs {
+    display: flex; gap: 4px; padding: 0.6rem;
+    overflow-x: auto; background: #f5f5f5;
+    flex-shrink: 0;
+    scrollbar-width: thin;
+  }
+  #gallery-thumbs::-webkit-scrollbar { height: 4px; }
+  #gallery-thumbs::-webkit-scrollbar-thumb { background: var(--rule); }
+  .gallery-thumb {
+    width: 56px; height: 42px; object-fit: cover;
+    cursor: pointer; opacity: 0.55; flex-shrink: 0;
+    transition: opacity 0.2s; border: 2px solid transparent;
+  }
+  .gallery-thumb:hover { opacity: 0.85; }
+  .gallery-thumb.active { opacity: 1; border-color: var(--rust); }
+</style>
+
+<script>
+  const greenlandPhotos = [
+    "gl_IMG_3273__1_.JPG","gl_IMG_3277.JPG","gl_IMG_3361.JPG","gl_IMG_3406.JPG",
+    "gl_IMG_3527.JPG","gl_IMG_3760.JPG","gl_IMG_3765.JPG","gl_IMG_3832.JPG",
+    "gl_IMG_3885.JPG","gl_IMG_3906.JPG","gl_IMG_3940.JPG","gl_IMG_3945.JPG",
+    "gl_IMG_3983.JPG","gl_IMG_4002.JPG","gl_IMG_4048.JPG","gl_IMG_4058.JPG",
+    "gl_IMG_4093.JPG","gl_IMG_4103.JPG","gl_IMG_4126.JPG","gl_IMG_4134.JPG",
+    "gl_IMG_4143.JPG","gl_IMG_4209.JPG","gl_IMG_4304.JPG","gl_IMG_4336.JPG",
+    "gl_IMG_4359.JPG","gl_IMG_4361.JPG","gl_IMG_4364.JPG","gl_IMG_4595.JPG",
+    "gl_IMG_4654.JPG","gl_IMG_4727.JPG","gl_IMG_4795.JPG","gl_IMG_4800.JPG",
+    "gl_IMG_4855.JPG"
+  ];
+  let currentIdx = 0;
+
+  function openGallery() {
+    const overlay = document.getElementById('gallery-overlay');
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    // build thumbs once
+    const thumbs = document.getElementById('gallery-thumbs');
+    if (!thumbs.children.length) {
+      greenlandPhotos.forEach((src, i) => {
+        const img = document.createElement('img');
+        img.src = src; img.className = 'gallery-thumb';
+        img.onclick = () => goTo(i);
+        thumbs.appendChild(img);
+      });
+    }
+    goTo(0);
+  }
+
+  function closeGallery() {
+    document.getElementById('gallery-overlay').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('gallery-overlay')) closeGallery();
+  }
+
+  function goTo(idx) {
+    currentIdx = (idx + greenlandPhotos.length) % greenlandPhotos.length;
+    const img = document.getElementById('gallery-img');
+    img.style.opacity = '0';
+    setTimeout(() => {
+      img.src = greenlandPhotos[currentIdx];
+      img.style.opacity = '1';
+    }, 100);
+    document.getElementById('gallery-counter').textContent =
+      (currentIdx + 1) + ' / ' + greenlandPhotos.length;
+    document.querySelectorAll('.gallery-thumb').forEach((t, i) =>
+      t.classList.toggle('active', i === currentIdx));
+    // scroll thumb into view
+    const thumbEl = document.querySelectorAll('.gallery-thumb')[currentIdx];
+    if (thumbEl) thumbEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+
+  function changePhoto(dir) { goTo(currentIdx + dir); }
+
+  // keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (document.getElementById('gallery-overlay').style.display === 'none') return;
+    if (e.key === 'ArrowRight') changePhoto(1);
+    if (e.key === 'ArrowLeft')  changePhoto(-1);
+    if (e.key === 'Escape')     closeGallery();
+  });
+</script>
+
+</body>
+</html>
