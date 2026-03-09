@@ -330,10 +330,7 @@
     </div>
   </div>
   <div class="hero-photo-col">
-    <div class="polaroid">
-      <img src="photo-me-kestrel.jpg" alt="Sarah holding an American Kestrel"/>
-      <div class="polaroid-cap">Treasure Valley, 2024</div>
-    </div>
+    <img src="photo-me-kestrel.jpg" alt="Sarah holding an American Kestrel" style="width:320px;height:440px;object-fit:cover;object-position:center top;display:block;box-shadow:0 24px 64px rgba(0,0,0,0.45);"/>
   </div>
 </section>
 
@@ -354,7 +351,7 @@
   <div class="sec-rule"></div>
   <div class="about-layout">
     <div class="about-body">
-      <p>I made my way to research in avian systems through some amazing early opportunities, including surveying breeding Cooper's Hawks in the pine barrens of Wisconsin and Peregrine Falcons on the tundra in Greenland. I completed my B.S. in Biology at the University of Wisconsin–Stevens Point, then worked as a seasonal technician for the Institute for Bird Populations, Intermountain Bird Observatory, and Raptorview Research Institute before spending several years with the University of Arizona, where I worked in the Badyaev and Duckworth Labs on long-running research projects in Missoula, Montana and Tucson, Arizona. It was there that I first developed my own research project — assessing network dynamics and temporal trends of avian pox in an urban house finch population — and where my interests in life history and disease ecology really clicked.</p>
+      <p>I made my way to research in avian systems through some amazing early opportunities, including surveying breeding Cooper's Hawks in the pine barrens of Wisconsin and Peregrine Falcons on the tundra in Greenland. I completed my B.S. in Biology at the University of Wisconsin–Stevens Point, then worked as a seasonal technician for the Institute for Bird Populations, Intermountain Bird Observatory, and Raptorview Research Institute before spending several years with the University of Arizona, where I worked in the Badyaev and Duckworth Labs on long-running research projects in Missoula, Montana and Tucson, Arizona. It was there that I first developed my own research project — assessing network dynamics and temporal trends of avian pox in an urban House Finch population — and where my interests in life history and disease ecology really clicked.</p>
       <p>I am currently a Master's student in the Heath Lab at Boise State, studying infection dynamics in a partial migrant population of American Kestrels. I want to know how environment and individual characteristics — like whether a bird migrates or stays put — shape who gets infected, how intensely, and whether these naturally-occurring infections carry measurable costs at chronic levels.</p>
       <p>Outside of research, I'm usually either deep in a Brandon Sanderson novel, out on a hike with my dog Darby, or at my local independent movie theater.</p>
       <div class="tags">
@@ -368,7 +365,6 @@
     </div>
     <div>
       <img class="about-photo" src="photo-me-field.png" alt="Sarah in the field"/>
-      <span class="photo-cap">somewhere in the Treasure Valley, probably looking for kestrels</span>
       <div class="info-card">
         <h4>Affiliation</h4>
         <p>Boise State University</p>
@@ -390,7 +386,6 @@
       </div>
       <div class="eggs-wrap">
         <img src="photo-kestrel-eggs.jpg" alt="Kestrel eggs in nest box"/>
-        <span>kestrel eggs — Treasure Valley, 2024</span>
       </div>
     </div>
   </div>
@@ -490,7 +485,7 @@
 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="sec-label">Active Work</div>
+  <div class="sec-label">Past and Present</div>
   <h2 class="sec-title">Research Projects</h2>
   <div class="sec-rule"></div>
   <div class="project-grid">
@@ -510,7 +505,7 @@
       <div class="project-body">
         <div class="project-num">02</div>
         <div class="project-title">Life History & Disease in Western Songbirds</div>
-        <p class="project-desc">As a research assistant and lead banding technician with the Badyaev and Duckworth Labs at the University of Arizona, I worked with Western and Mountain Bluebird populations and House Finches across multiple field seasons. Within the Badyaev Lab, I developed an independent project assessing network dynamics and temporal trends of avian pox in an urban house finch population.</p>
+        <p class="project-desc">As a research assistant and lead banding technician with the Badyaev and Duckworth Labs at the University of Arizona, I worked with Western and Mountain Bluebird populations and House Finches across multiple field seasons. Within the Badyaev Lab, I developed an independent project assessing network dynamics and temporal trends of avian pox in an urban House Finch population.</p>
         <div class="tags"><span class="tag">Avian Pox</span><span class="tag">House Finch</span><span class="tag">Bluebirds</span><span class="tag">Long-term Study</span></div>
       </div>
     </div>
@@ -625,7 +620,7 @@
         <p class="contact-blurb">Always happy to chat about research, birds, or potential collaborations. Don't hesitate to get in touch!</p>
       </div>
       <div class="contact-links">
-        <a href="mailto:sarahscott390@u.boisestate.edu" class="contact-link">
+        <a href="/cdn-cgi/l/email-protection#16657764777e6575796262252f2656633874797f6573656277627338737263" class="contact-link">
           <span class="contact-icon">✉</span>
           <span class="contact-info"><span class="contact-lbl">Email</span><span class="contact-val">sarahscott390 [at] u.boisestate.edu</span></span>
         </a>
@@ -735,7 +730,7 @@
   .gallery-thumb.active { opacity: 1; border-color: var(--rust); }
 </style>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const greenlandPhotos = [
     "gl_IMG_3273__1_.JPG","gl_IMG_3277.JPG","gl_IMG_3361.JPG","gl_IMG_3406.JPG",
     "gl_IMG_3527.JPG","gl_IMG_3760.JPG","gl_IMG_3765.JPG","gl_IMG_3832.JPG",
@@ -797,11 +792,4 @@
   // keyboard navigation
   document.addEventListener('keydown', e => {
     if (document.getElementById('gallery-overlay').style.display === 'none') return;
-    if (e.key === 'ArrowRight') changePhoto(1);
-    if (e.key === 'ArrowLeft')  changePhoto(-1);
-    if (e.key === 'Escape')     closeGallery();
-  });
-</script>
-
-</body>
-</html>
+    if (e.key ===
