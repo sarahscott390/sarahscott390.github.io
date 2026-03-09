@@ -13,8 +13,8 @@
       --ink-mid:  #4a4035;
       --ink-light:#8a7d6e;
       --rule:     #e8e2d8;
-      --rust:     #b8521e;
-      --rust-pale:#fdf0ea;
+      --rust:     #4a7060;
+      --rust-pale:#edf4f1;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -44,42 +44,49 @@
     /* ── HERO ── */
     #hero {
       min-height: 100vh;
-      display: grid; grid-template-columns: 1fr 1fr;
+      display: grid; grid-template-columns: 1fr;
       padding-top: 56px; position: relative; overflow: hidden;
     }
     .hero-bg {
       position: absolute; inset: 0; z-index: 0;
-      background: url('photo-idaho-hills.jpg') center 40% / cover no-repeat;
-      filter: brightness(0.42) saturate(0.8);
+      background: url('photo-me-kestrel.jpg') center 20% / cover no-repeat;
+      filter: brightness(0.55) saturate(0.85);
     }
     .hero-text {
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 6vw 4vw 6vw 8vw; position: relative; z-index: 1;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 4vw 6vw 6vw; position: relative; z-index: 1;
+      min-height: calc(100vh - 56px);
+    }
+    .hero-text-box {
+      background: rgba(250,248,244,0.93);
+      backdrop-filter: blur(6px);
+      padding: 2.4rem 2.8rem;
+      max-width: 560px;
     }
     .hero-eyebrow {
       font-family: 'DM Sans', sans-serif; font-size: 0.7rem;
       letter-spacing: 0.16em; text-transform: uppercase;
-      color: rgba(250,248,244,0.5); margin-bottom: 0.8rem;
+      color: var(--rust); margin-bottom: 0.6rem;
     }
     .hero-name {
       font-family: 'EB Garamond', serif;
-      font-size: clamp(3rem, 5.5vw, 5rem);
-      font-weight: 400; line-height: 1.0; color: #fff;
-      margin-bottom: 1.4rem;
+      font-size: clamp(2.6rem, 4.5vw, 4rem);
+      font-weight: 400; line-height: 1.0; color: var(--ink);
+      margin-bottom: 1rem;
     }
-    .hero-name em { font-style: italic; color: rgba(250,248,244,0.75); }
+    .hero-name em { font-style: italic; color: var(--ink-light); }
     .hero-tagline {
-      font-family: 'EB Garamond', serif; font-size: 1.15rem;
-      font-style: italic; color: rgba(250,248,244,0.65);
-      max-width: 400px; line-height: 1.75; margin-bottom: 2rem;
+      font-family: 'EB Garamond', serif; font-size: 1.05rem;
+      font-style: italic; color: var(--ink-mid);
+      line-height: 1.75; margin-bottom: 1.4rem;
     }
     .hero-meta {
       border-left: 2px solid var(--rust); padding-left: 1rem;
       display: flex; flex-direction: column; gap: 0.2rem;
-      font-size: 0.8rem; color: rgba(250,248,244,0.45);
-      margin-bottom: 2.8rem; font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem; color: var(--ink-light);
+      margin-bottom: 1.8rem; font-family: 'DM Sans', sans-serif;
     }
-    .hero-meta strong { color: rgba(250,248,244,0.65); font-weight: 500; }
+    .hero-meta strong { color: var(--ink-mid); font-weight: 500; }
     .btn-row { display: flex; gap: 0.9rem; }
     .btn {
       display: inline-block; padding: 0.6rem 1.5rem;
@@ -88,29 +95,9 @@
       text-decoration: none; border-radius: 2px; transition: all 0.2s;
     }
     .btn-primary { background: var(--rust); color: #fff; border: 1.5px solid var(--rust); }
-    .btn-primary:hover { background: #9a3f12; border-color: #9a3f12; }
-    .btn-outline { background: transparent; color: rgba(250,248,244,0.8); border: 1.5px solid rgba(250,248,244,0.25); }
-    .btn-outline:hover { border-color: rgba(250,248,244,0.7); color: #fff; }
-
-    /* polaroid photo */
-    .hero-photo-col {
-      display: flex; align-items: flex-end; justify-content: center;
-      padding: 4rem 5rem 0; position: relative; z-index: 1;
-    }
-    .polaroid {
-      background: #fff; padding: 8px 8px 36px;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.45);
-      transform: rotate(1.5deg);
-    }
-    .polaroid img {
-      display: block; width: 290px; height: 400px;
-      object-fit: cover; object-position: center top;
-    }
-    .polaroid-cap {
-      font-family: 'EB Garamond', serif; font-size: 0.88rem;
-      font-style: italic; color: #aaa;
-      text-align: center; margin-top: 6px;
-    }
+    .btn-primary:hover { background: #375a4a; border-color: #375a4a; }
+    .btn-outline { background: transparent; color: var(--ink-mid); border: 1.5px solid var(--rule); }
+    .btn-outline:hover { border-color: var(--rust); color: var(--rust); }
 
     /* ── PHOTO STRIP ── */
     .strip {
@@ -290,12 +277,11 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
-      #hero { grid-template-columns: 1fr; }
-      .hero-photo-col { display: none; }
-      .hero-text { padding: 5rem 7vw 3.5rem; }
       .about-layout, .cv-layout, .contact-layout { grid-template-columns: 1fr; gap: 2.5rem; }
       .nav-links { display: none; }
       section { padding: 4rem 6vw; }
+      .hero-text { padding: 3rem 5vw 4rem; }
+      .hero-text-box { padding: 1.8rem 1.6rem; }
     }
   </style>
 </head>
@@ -317,29 +303,28 @@
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-text">
-    <p class="hero-eyebrow">MS Student · Boise State University</p>
-    <h1 class="hero-name">Sarah E.<br><em>Scott</em></h1>
-    <p class="hero-tagline">Exploring how disease ecology, physiology, and life history interact and shape one another in wild bird populations.</p>
-    <div class="hero-meta">
-      <span><strong>Department</strong> of Biological Sciences</span>
-      <span><strong>Advisor:</strong> Dr. Julie Heath · Heath Lab</span>
+    <div class="hero-text-box">
+      <p class="hero-eyebrow">MS Student · Boise State University</p>
+      <h1 class="hero-name">Sarah E.<br><em>Scott</em></h1>
+      <p class="hero-tagline">Exploring how disease ecology, physiology, and life history interact and shape one another in wild bird populations.</p>
+      <div class="hero-meta">
+        <span><strong>Department</strong> of Biological Sciences</span>
+        <span><strong>Advisor:</strong> Dr. Julie Heath · Heath Lab</span>
+      </div>
+      <div class="btn-row">
+        <a href="#contact" class="btn btn-primary">Get in Touch</a>
+        <a href="#publications" class="btn btn-outline">View Research</a>
+      </div>
     </div>
-    <div class="btn-row">
-      <a href="#contact" class="btn btn-primary">Get in Touch</a>
-      <a href="#publications" class="btn btn-outline">View Research</a>
-    </div>
-  </div>
-  <div class="hero-photo-col">
-    <img src="photo-me-kestrel.jpg" alt="Sarah holding an American Kestrel" style="width:380px;height:480px;object-fit:cover;object-position:center 20%;display:block;box-shadow:0 24px 64px rgba(0,0,0,0.45);"/>
   </div>
 </section>
 
 <!-- PHOTO STRIP -->
 <div class="strip">
-  <img src="photo-finch-green.jpg"       alt="House Finch close-up, green background"/>
-  <img src="photo-finch-palm.jpg"        alt="House Finch, palm background"/>
-  <img src="photo-bluebird-perch.jpg"    alt="Western Bluebird perched"/>
+  <img src="photo-me-kestrel.jpg"        alt="Sarah holding an American Kestrel"/>
   <img src="photo-kestrel-portrait.jpg"  alt="Kestrel close-up portrait"/>
+  <img src="photo-bluebird-perch.jpg"    alt="Western Bluebird perched"/>
+  <img src="photo-greenland-wading.jpg"  alt="Wading in Greenland"/>
   <img src="photo-idaho-stormy.jpg"      alt="Stormy Idaho hills"/>
   <img src="photo-montana-snow.jpg"      alt="Snowy pines, Montana"/>
 </div>
@@ -385,7 +370,7 @@
         </ul>
       </div>
       <div class="eggs-wrap">
-        <img src="photo-kestrel-eggs.jpg" alt="Kestrel eggs in nest box"/>
+        <img src="photo-greenland-wading.jpg" alt="Wading in Greenland"/>
       </div>
     </div>
   </div>
@@ -491,45 +476,54 @@
   <div class="project-grid">
 
     <div class="project-card">
-      <img class="project-img" src="photo-kestrel-pair.jpg" alt="Male and female kestrel"/>
+      <div style="position:relative;">
+        <img class="project-img" src="photo-kestrel-pair.jpg" alt="Male and female kestrel" style="cursor:pointer;" onclick="openGalleryNamed('kestrel')"/>
+        <div onclick="openGalleryNamed('kestrel')" style="position:absolute;bottom:0.6rem;right:0.6rem;background:rgba(0,0,0,0.55);color:#fff;font-family:'DM Sans',sans-serif;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.3rem 0.6rem;border-radius:2px;cursor:pointer;">View Gallery ↗</div>
+      </div>
       <div class="project-body">
         <div class="project-num">01</div>
         <div class="project-title">Haemosporidian Infection Dynamics in American Kestrels</div>
-        <p class="project-desc">My M.S. research focuses on infection dynamics in a banded, monitored nest box population of American Kestrels in the Treasure Valley of SW Idaho. I'm asking how environment and individual characteristics — including migration strategy — shape infection prevalence and intensity, and whether naturally occurring infections carry measurable costs to reproductive success, body condition, carotenoids, and telomere length.</p>
-        <div class="tags"><span class="tag">Disease Ecology</span><span class="tag">Haemosporidians</span><span class="tag">Partial Migration</span><span class="tag">Telomeres</span></div>
+        <p class="project-desc">My M.S. research focuses on infection dynamics in a partial migrant population of American Kestrels in the Treasure Valley of SW Idaho and assesses how environment and individual characteristics, including migration strategy, shape infection prevalence and intensity. I am also interested in whether naturally occurring infections carry measurable physiological costs, at chronic levels.</p>
+        <div class="tags"><span class="tag">Disease Ecology</span><span class="tag">Partial Migration</span><span class="tag">Haemosporidian Blood Parasites</span><span class="tag">Telomeres</span><span class="tag">Boise State University</span></div>
       </div>
     </div>
 
     <div class="project-card">
-      <img class="project-img" src="photo-finch-bark.jpg" alt="House finch in hand"/>
+      <div style="position:relative;">
+        <img class="project-img" src="photo-finch-bark.jpg" alt="House Finch in hand" style="cursor:pointer;" onclick="openGalleryNamed('songbirds')"/>
+        <div onclick="openGalleryNamed('songbirds')" style="position:absolute;bottom:0.6rem;right:0.6rem;background:rgba(0,0,0,0.55);color:#fff;font-family:'DM Sans',sans-serif;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.3rem 0.6rem;border-radius:2px;cursor:pointer;">View Gallery ↗</div>
+      </div>
       <div class="project-body">
         <div class="project-num">02</div>
         <div class="project-title">Life History & Disease in Western Songbirds</div>
-        <p class="project-desc">As a research assistant and lead banding technician with the Badyaev and Duckworth Labs at the University of Arizona, I worked with Western and Mountain Bluebird populations and House Finches across multiple field seasons. Within the Badyaev Lab, I developed an independent project assessing network dynamics and temporal trends of avian pox in an urban House Finch population.</p>
-        <div class="tags"><span class="tag">Avian Pox</span><span class="tag">House Finch</span><span class="tag">Bluebirds</span><span class="tag">Long-term Study</span></div>
+        <p class="project-desc">As a research assistant and lead banding technician with the Badyaev and Duckworth Labs at the University of Arizona, I worked with Western and Mountain Bluebirds, and House Finches across multiple years. Within the Badyaev Lab, I was able to develop an independent research project assessing network dynamics of avian pox in an urban House Finch population.</p>
+        <div class="tags"><span class="tag">Avian Pox</span><span class="tag">House Finch</span><span class="tag">Western Bluebird</span><span class="tag">Mountain Bluebird</span><span class="tag">University of Arizona</span></div>
       </div>
     </div>
 
-    <div class="project-card greenland-card" onclick="openGallery()" style="cursor:pointer;">
+    <div class="project-card greenland-card" onclick="openGalleryNamed('greenland')" style="cursor:pointer;">
       <div style="position:relative;">
         <img class="project-img" src="gl_IMG_3277.JPG" alt="Greenland fieldwork"/>
         <div style="position:absolute;bottom:0.6rem;right:0.6rem;background:rgba(0,0,0,0.55);color:#fff;font-family:'DM Sans',sans-serif;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.3rem 0.6rem;border-radius:2px;">View Gallery ↗</div>
       </div>
       <div class="project-body">
         <div class="project-num">03</div>
-        <div class="project-title">Arctic Field Research — Greenland</div>
-        <p class="project-desc">Conducted breeding bird surveys and biological sample collection in northwestern Greenland, focusing on seabirds, raptors, and passerines. Contributed to the mercury contamination study currently in review at Environmental Toxicology and Chemistry, and processed nest camera data for the High Arctic Institute.</p>
-        <div class="tags"><span class="tag">Arctic Ecology</span><span class="tag">Peregrine Falcon</span><span class="tag">Mercury</span></div>
+        <div class="project-title">Arctic Field Research in Greenland</div>
+        <p class="project-desc">I have travelled to Greenland as part of two arctic field teams, first as a student with Dr. Robert Rosenfield (UWSP) and more recently alongside Dr. Kurt Burnham (High Arctic Institute). Both trips involved breeding bird and occupancy surveys targeting Peregrine Falcons and Gyrfalcons. With High Arctic Institute, I also conducted broad breeding bird surveys and biological sample collection in northwestern Greenland, focusing on seabirds and passerines. As part of this work, I also contributed to the mercury contamination study currently in review at Environmental Toxicology and Chemistry and processed nest camera data.</p>
+        <div class="tags"><span class="tag">Arctic Ecology</span><span class="tag">Peregrine Falcon</span><span class="tag">Gyrfalcon</span><span class="tag">Mercury Contamination</span><span class="tag">High Arctic Institute</span></div>
       </div>
     </div>
 
     <div class="project-card">
-      <img class="project-img" src="photo-eagle-release.jpg" alt="Golden eagle release, Montana"/>
+      <div style="position:relative;">
+        <img class="project-img" src="photo-eagle-release.jpg" alt="Golden Eagle release, Montana" style="cursor:pointer;" onclick="openGalleryNamed('raptor')"/>
+        <div onclick="openGalleryNamed('raptor')" style="position:absolute;bottom:0.6rem;right:0.6rem;background:rgba(0,0,0,0.55);color:#fff;font-family:'DM Sans',sans-serif;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.3rem 0.6rem;border-radius:2px;cursor:pointer;">View Gallery ↗</div>
+      </div>
       <div class="project-body">
         <div class="project-num">04</div>
         <div class="project-title">Raptor Migration Monitoring</div>
-        <p class="project-desc">Seasonal field technician work across multiple migration monitoring projects — Golden Eagle migration counts and banding in Montana with Raptorview Research Institute, and diurnal raptor banding and migration counts with Intermountain Bird Observatory during fall migration.</p>
-        <div class="tags"><span class="tag">Golden Eagle</span><span class="tag">Migration</span><span class="tag">Banding</span></div>
+        <p class="project-desc">I worked as a seasonal field technician across multiple migration monitoring projects, including Golden Eagle migration counts and banding in Montana with Raptorview Research Institute, and diurnal raptor banding and migration counts with Intermountain Bird Observatory during fall migration.</p>
+        <div class="tags"><span class="tag">Golden Eagle</span><span class="tag">Migration Monitoring</span><span class="tag">Raptorview Research Institute</span><span class="tag">Intermountain Bird Observatory</span></div>
       </div>
     </div>
 
@@ -538,8 +532,8 @@
       <div class="project-body">
         <div class="project-num">05</div>
         <div class="project-title">Additional Field Experience</div>
-        <p class="project-desc">Willow Flycatcher and North American Beaver surveys in wetland habitats with the Institute for Bird Populations; Cooper's Hawk observation and banding at UWSP; and environmental education and outreach with Southern Wisconsin Bird Alliance.</p>
-        <div class="tags"><span class="tag">Willow Flycatcher</span><span class="tag">Cooper's Hawk</span><span class="tag">Field Surveys</span><span class="tag">Outreach</span></div>
+        <p class="project-desc">As a seasonal field technician, I conducted surveys for Willow Flycatchers and North American Beaver in wetland habitats in the Sierra Nevada with the Institute for Bird Populations and environmental education and outreach with Southern Wisconsin Bird Alliance.</p>
+        <div class="tags"><span class="tag">Southern Wisconsin Bird Alliance</span><span class="tag">Institute for Bird Populations</span><span class="tag">Willow Flycatcher</span><span class="tag">North American Beaver</span><span class="tag">Environmental Education</span></div>
       </div>
     </div>
 
@@ -589,16 +583,16 @@
       </div>
       <div class="cv-block">
         <div class="cv-block-title">Teaching</div>
-        <div class="cv-row"><div class="cv-row-title">Graduate Teaching Assistant/Instructor</div><div class="cv-row-org">Boise State University</div><div class="cv-row-date">2023 — Present</div></div>
+        <div class="cv-row"><div class="cv-row-title">Graduate Teaching Assistant</div><div class="cv-row-org">Boise State University</div><div class="cv-row-date">2023 — Present</div></div>
         <div class="cv-row"><div class="cv-row-title">VIP: Biology of Migratory Birds (Disease Ecology module)</div><div class="cv-row-date">2024 — Present</div></div>
         <div class="cv-row"><div class="cv-row-title">BIOL 227: Anatomy and Physiology Lab</div><div class="cv-row-date">2023 — Present</div></div>
       </div>
       <div class="cv-block">
         <div class="cv-block-title">Professional Societies</div>
-        <div class="cv-row"><div class="cv-row-title">Society of Integrative and Comparative Biology</div><div class="cv-row-date">2025 — Present</div></div>
+        <div class="cv-row"><div class="cv-row-title">Raptor Research Foundation</div><div class="cv-row-date">2023 — Present</div></div>
         <div class="cv-row"><div class="cv-row-title">American Ornithological Society</div><div class="cv-row-date">2024 — Present</div></div>
         <div class="cv-row"><div class="cv-row-title">Association of Field Ornithologists</div><div class="cv-row-date">2024 — Present</div></div>
-        <div class="cv-row"><div class="cv-row-title">Raptor Research Foundation</div><div class="cv-row-date">2023 — Present</div></div>
+        <div class="cv-row"><div class="cv-row-title">Society of Integrative and Comparative Biology</div><div class="cv-row-date">2025 — Present</div></div>
         <div class="cv-row"><div class="cv-row-title">Western Field Ornithologists</div><div class="cv-row-date">2025 — Present</div></div>
       </div>
     </div>
@@ -730,36 +724,67 @@
   .gallery-thumb.active { opacity: 1; border-color: var(--rust); }
 </style>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  const greenlandPhotos = [
-    "gl_IMG_3273__1_.JPG","gl_IMG_3277.JPG","gl_IMG_3361.JPG","gl_IMG_3406.JPG",
-    "gl_IMG_3527.JPG","gl_IMG_3760.JPG","gl_IMG_3765.JPG","gl_IMG_3832.JPG",
-    "gl_IMG_3885.JPG","gl_IMG_3906.JPG","gl_IMG_3940.JPG","gl_IMG_3945.JPG",
-    "gl_IMG_3983.JPG","gl_IMG_4002.JPG","gl_IMG_4048.JPG","gl_IMG_4058.JPG",
-    "gl_IMG_4093.JPG","gl_IMG_4103.JPG","gl_IMG_4126.JPG","gl_IMG_4134.JPG",
-    "gl_IMG_4143.JPG","gl_IMG_4209.JPG","gl_IMG_4304.JPG","gl_IMG_4336.JPG",
-    "gl_IMG_4359.JPG","gl_IMG_4361.JPG","gl_IMG_4364.JPG","gl_IMG_4595.JPG",
-    "gl_IMG_4654.JPG","gl_IMG_4727.JPG","gl_IMG_4795.JPG","gl_IMG_4800.JPG",
-    "gl_IMG_4855.JPG"
-  ];
-  let currentIdx = 0;
+<script>
+  const galleries = {
+    greenland: {
+      title: "Arctic Field Research — Greenland, 2022",
+      photos: [
+        "gl_IMG_3273__1_.JPG","gl_IMG_3277.JPG","gl_IMG_3361.JPG","gl_IMG_3406.JPG",
+        "gl_IMG_3527.JPG","gl_IMG_3760.JPG","gl_IMG_3765.JPG","gl_IMG_3832.JPG",
+        "gl_IMG_3885.JPG","gl_IMG_3906.JPG","gl_IMG_3940.JPG","gl_IMG_3945.JPG",
+        "gl_IMG_3983.JPG","gl_IMG_4002.JPG","gl_IMG_4048.JPG","gl_IMG_4058.JPG",
+        "gl_IMG_4093.JPG","gl_IMG_4103.JPG","gl_IMG_4126.JPG","gl_IMG_4134.JPG",
+        "gl_IMG_4143.JPG","gl_IMG_4209.JPG","gl_IMG_4304.JPG","gl_IMG_4336.JPG",
+        "gl_IMG_4359.JPG","gl_IMG_4361.JPG","gl_IMG_4364.JPG","gl_IMG_4595.JPG",
+        "gl_IMG_4654.JPG","gl_IMG_4727.JPG","gl_IMG_4795.JPG","gl_IMG_4800.JPG",
+        "gl_IMG_4855.JPG"
+      ]
+    },
+    kestrel: {
+      title: "Haemosporidian Infection Dynamics in American Kestrels",
+      photos: [
+        "photo-kestrel-pair.jpg","photo-kestrel-portrait.jpg",
+        "photo-kestrel-eggs.jpg","photo-nestbox-sagebrush.jpg",
+        "photo-idaho-hills.jpg","photo-idaho-stormy.jpg"
+      ]
+    },
+    songbirds: {
+      title: "Life History & Disease in Western Songbirds",
+      photos: [
+        "photo-finch-bark.jpg","photo-finch-green.jpg","photo-finch-palm.jpg",
+        "photo-bluebird-box.jpg","photo-bluebird-perch.jpg",
+        "photo-montana-meadow.jpg","photo-tucson-snow.jpg"
+      ]
+    },
+    raptor: {
+      title: "Raptor Migration Monitoring",
+      photos: [
+        "photo-eagle-release.jpg","photo-montana-snow.jpg"
+      ]
+    }
+  };
 
-  function openGallery() {
+  let currentIdx = 0;
+  let currentGallery = null;
+
+  function openGalleryNamed(name) {
+    currentGallery = galleries[name];
     const overlay = document.getElementById('gallery-overlay');
     overlay.style.display = 'flex';
     document.body.style.overflow = 'hidden';
-    // build thumbs once
+    document.getElementById('gallery-title').textContent = currentGallery.title;
     const thumbs = document.getElementById('gallery-thumbs');
-    if (!thumbs.children.length) {
-      greenlandPhotos.forEach((src, i) => {
-        const img = document.createElement('img');
-        img.src = src; img.className = 'gallery-thumb';
-        img.onclick = () => goTo(i);
-        thumbs.appendChild(img);
-      });
-    }
+    thumbs.innerHTML = '';
+    currentGallery.photos.forEach((src, i) => {
+      const img = document.createElement('img');
+      img.src = src; img.className = 'gallery-thumb';
+      img.onclick = () => goTo(i);
+      thumbs.appendChild(img);
+    });
     goTo(0);
   }
+
+  function openGallery() { openGalleryNamed('greenland'); }
 
   function closeGallery() {
     document.getElementById('gallery-overlay').style.display = 'none';
@@ -771,25 +796,31 @@
   }
 
   function goTo(idx) {
-    currentIdx = (idx + greenlandPhotos.length) % greenlandPhotos.length;
+    if (!currentGallery) return;
+    currentIdx = (idx + currentGallery.photos.length) % currentGallery.photos.length;
     const img = document.getElementById('gallery-img');
     img.style.opacity = '0';
     setTimeout(() => {
-      img.src = greenlandPhotos[currentIdx];
+      img.src = currentGallery.photos[currentIdx];
       img.style.opacity = '1';
     }, 100);
     document.getElementById('gallery-counter').textContent =
-      (currentIdx + 1) + ' / ' + greenlandPhotos.length;
+      (currentIdx + 1) + ' / ' + currentGallery.photos.length;
     document.querySelectorAll('.gallery-thumb').forEach((t, i) =>
       t.classList.toggle('active', i === currentIdx));
-    // scroll thumb into view
     const thumbEl = document.querySelectorAll('.gallery-thumb')[currentIdx];
     if (thumbEl) thumbEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
   }
 
   function changePhoto(dir) { goTo(currentIdx + dir); }
 
-  // keyboard navigation
   document.addEventListener('keydown', e => {
     if (document.getElementById('gallery-overlay').style.display === 'none') return;
-    if (e.key ===
+    if (e.key === 'ArrowRight') changePhoto(1);
+    if (e.key === 'ArrowLeft')  changePhoto(-1);
+    if (e.key === 'Escape')     closeGallery();
+  });
+</script>
+
+</body>
+</html>
